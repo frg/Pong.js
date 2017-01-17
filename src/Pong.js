@@ -211,6 +211,7 @@ Pong.prototype.setBackgroundColor = function (color) {
     }
 
     this.stage.setBackgroundColor(color);
+    this.renderer.backgroundColor = color;
     this.updateIfStill();
 };
 
