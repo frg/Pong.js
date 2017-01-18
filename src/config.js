@@ -13,6 +13,7 @@ module.exports = {
         align: 'center'
     },
     LINES_COLOR: 0xEEEEEE,
+    LINES_WIDTH: 10,
     BALL_COLOR: 0xEEEEEE,
     BALL_SIZE: 10,
     BALL_SPEED: 15
