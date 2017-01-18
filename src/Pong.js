@@ -150,23 +150,6 @@ Pong.prototype.updateIfStill = function() {
     }
 };
 
-Pong.prototype.resize = function() {
-    var width = this.wrapper.clientWidth,
-        height = this.wrapper.clientHeight;
-
-    this.updateBackgroundSize();
-    this.renderer.resize(width, height);
-    this.emit('resize', width, height, this);
-    this.renderer.render(this.stage);
-};
-
-Pong.prototype.updateBackgroundSize = function() {
-    if (this.backgroundImage) {
-        this.backgroundImage.width = this.renderer.width;
-        this.backgroundImage.height = this.renderer.height;
-    }
-};
-
 Pong.prototype.restart = function(addBall, dir) {
     var ball;
 
@@ -213,22 +196,55 @@ Pong.prototype.setBackgroundColor = function(color) {
     this.updateIfStill();
 };
 
-Pong.prototype.setBackgroundImage = function(image) {
+Pong.prototype.setBackgroundImage = function(imageOptions) {
+    this.backgroundImageOptions = imageOptions;
+
+    // clean old background image if any
     if (this.backgroundImage) {
         this.stage.removeChild(this.backgroundImage);
     }
 
-    this.backgroundImage = pixi.Sprite.fromImage(image);
+    this.backgroundImage = pixi.Sprite.fromImage(this.backgroundImageOptions.src);
     this.updateBackgroundSize();
     this.stage.addChildAt(this.backgroundImage, 0);
-    var self = this;
 
+    // preload image for better performance
     var preload = new Image();
-    preload.src = image;
+    preload.src = this.backgroundImageOptions.src;
 
+    var self = this;
     this.backgroundImage.texture.baseTexture.on('loaded', function() {
         self.refresh();
     });
+};
+
+function calaculateWithToHeightRatio(ratioStr) {
+    var ratioArr = ratioStr.split(':');
+    return ratioArr[0] / ratioArr[1];
+}
+
+Pong.prototype.updateBackgroundSize = function() {
+    if (this.backgroundImage) {
+        if (this.backgroundImageOptions.strech === 'width') {
+            this.backgroundImage.width = this.renderer.width;
+            this.backgroundImage.height = this.renderer.width / calaculateWithToHeightRatio(this.backgroundImageOptions.aspectRatio);
+            this.backgroundImage.y = (this.renderer.height / 2) - (this.backgroundImage.height / 2);
+        } else {
+            this.backgroundImage.width = this.renderer.height * calaculateWithToHeightRatio(this.backgroundImageOptions.aspectRatio);
+            this.backgroundImage.height = this.renderer.height;
+            this.backgroundImage.x = (this.renderer.width / 2) - (this.backgroundImage.width / 2);
+        }
+    }
+};
+
+Pong.prototype.resize = function() {
+    var width = this.wrapper.clientWidth,
+        height = this.wrapper.clientHeight;
+
+    this.updateBackgroundSize();
+    this.renderer.resize(width, height);
+    this.emit('resize', width, height, this);
+    this.renderer.render(this.stage);
 };
 
 Pong.prototype.setLinesColor = function(color) {
