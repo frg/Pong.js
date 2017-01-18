@@ -9,8 +9,7 @@ var pixi = require('pixi.js'),
         controls: {
             'up': null,
             'down': null
-        },
-        speed: 300
+        }
     },
     Player;
 
@@ -22,7 +21,7 @@ Player = function(game, options) {
     this.radius = config.BARS_BORDER_RADIUS;
     this.width = config.BARS_WIDTH;
     this.height = options.height || config.BARS_HEIGHT;
-    this.speed = options.speed || defaults.speed;
+    this.speed = options.speed || config.PLAYER_SPEED;
     this.lastUpdate = new Date().getTime();
     this.keyboard = new Keyboard(options.controls || defaults.controls);
     this.y = 0;

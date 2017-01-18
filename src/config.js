@@ -4,6 +4,7 @@ module.exports = {
     BARS_HEIGHT: 150,
     BARS_BORDER_RADIUS: 100,
 
+    PLAYER_SPEED: 400,
     PLAYER_MARGIN: 20,
     PLAYER_COLOR: 0xEEEEEE,
 
