@@ -2,6 +2,7 @@
 var config = require('./config'),
     extend = require('deep-extend'),
     pixi = require('pixi'),
+    pixi = require('pixi.js'),
     MessageScreen;
 
 MessageScreen = function (game) {

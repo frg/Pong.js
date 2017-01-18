@@ -1,5 +1,6 @@
 
 var pixi = require('pixi'),
+var pixi = require('pixi.js'),
     config = require('./config'),
     extend = require('deep-extend'),
     ScoreDisplay;

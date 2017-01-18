@@ -1,5 +1,6 @@
 
 var pixi = require('pixi'),
+var pixi = require('pixi.js'),
     Loop = require('game-loop'),
     Player = require('./Player'),
     Ball = require('./Ball'),
