@@ -4,11 +4,11 @@ module.exports = {
     BARS_HEIGHT: 150,
     BARS_BORDER_RADIUS: 100,
 
-    PLAYER_SPEED: 400,
+    PLAYER_SPEED: 500,
     PLAYER_MARGIN: 20,
     PLAYER_COLOR: 0xEEEEEE,
 
-    SCORES_MARGIN: { x: 30, y: 30 },
+    SCORES_MARGIN: { x: 40, y: 10 },
 
     TEXT_STYLE: {
         fontFamily: ['Helvetica', 'Arial'],
@@ -21,6 +21,7 @@ module.exports = {
     // paddle line distance from edges
     LINES_DISTANCE: 20,
     LINES_COLOR: 0xEEEEEE,
+    // TODO: hide lines options (for now use 0 as width)
     LINES_WIDTH: 10,
 
     BALL_COLOR: 0xEEEEEE,

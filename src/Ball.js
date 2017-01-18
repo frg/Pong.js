@@ -115,8 +115,8 @@
      this.x += (elapsed / 50) * this.velocity.x;
      this.y += (elapsed / 50) * this.velocity.y;
 
-     this.graphics.position.x = this.game.renderer.width / 2 + this.x;
-     this.graphics.position.y = this.game.renderer.height / 2 + this.y;
+     this.graphics.position.x = (this.game.renderer.width / 2) + this.x;
+     this.graphics.position.y = (this.game.renderer.height / 2) + this.y;
  };
 
  Ball.prototype.update = function() {
@@ -129,8 +129,8 @@
 
  Ball.prototype.getBoundingBox = function() {
      return new geometry.Rect({
-         x: this.game.renderer.width / 2 + this.x - this.size,
-         y: this.game.renderer.height / 2 + this.y - this.size
+         x: (this.game.renderer.width / 2) + (this.x - this.size),
+         y: (this.game.renderer.height / 2) + (this.y - this.size)
      }, {
          width: this.size * 2,
          height: this.size * 2
