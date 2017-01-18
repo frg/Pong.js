@@ -43,14 +43,14 @@ ScoreDisplay.prototype.updatePosition = function() {
     var renderer = this.player.game.renderer;
 
     if (this.player.side === 'left') {
-        this.text.position.x = renderer.width / 2 - config.SCORES_MARGIN.x;
+        this.text.position.x = (renderer.width / 2) - config.SCORES_MARGIN.x;
     } else {
-        this.text.position.x = renderer.width / 2 + config.SCORES_MARGIN.x;
+        this.text.position.x = (renderer.width / 2) + config.SCORES_MARGIN.x;
     }
 };
 
 ScoreDisplay.prototype.update = function() {
-    this.text = this.player.score + '';
+    this.text.text = this.player.score + '';
 };
 
 ScoreDisplay.prototype.resize = function() {
