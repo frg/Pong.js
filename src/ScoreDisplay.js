@@ -50,7 +50,7 @@ ScoreDisplay.prototype.updatePosition = function() {
 };
 
 ScoreDisplay.prototype.update = function() {
-    this.text.setText(this.player.score + '');
+    this.text = this.player.score + '';
 };
 
 ScoreDisplay.prototype.resize = function() {
