@@ -1,34 +1,32 @@
-
-var pixi = require('pixi'),
 var pixi = require('pixi.js'),
     config = require('./config'),
     extend = require('deep-extend'),
     ScoreDisplay;
 
-ScoreDisplay = function (player) {
+ScoreDisplay = function(player) {
     this.player = player;
     this.render();
     this.bind();
 };
 
-ScoreDisplay.prototype.bind = function () {
+ScoreDisplay.prototype.bind = function() {
     var self = this;
 
-    this.player.on('point', function () {
+    this.player.on('point', function() {
         self.update();
     });
 
-    this.player.game.on('setTextStyle', function (color) {
+    this.player.game.on('setTextStyle', function(color) {
         self.setTextStyle(color);
     });
 };
 
-ScoreDisplay.prototype.setTextStyle = function (style) {
+ScoreDisplay.prototype.setTextStyle = function(style) {
     style = extend(config.TEXT_STYLE, style);
     this.text.setStyle(style);
 };
 
-ScoreDisplay.prototype.render = function () {
+ScoreDisplay.prototype.render = function() {
     this.text = new pixi.Text(this.player.score + '', config.TEXT_STYLE);
 
     if (this.player.side === 'left') {
@@ -41,7 +39,7 @@ ScoreDisplay.prototype.render = function () {
     this.player.game.stage.addChild(this.text);
 };
 
-ScoreDisplay.prototype.updatePosition = function () {
+ScoreDisplay.prototype.updatePosition = function() {
     var renderer = this.player.game.renderer;
 
     if (this.player.side === 'left') {
@@ -51,11 +49,11 @@ ScoreDisplay.prototype.updatePosition = function () {
     }
 };
 
-ScoreDisplay.prototype.update = function () {
+ScoreDisplay.prototype.update = function() {
     this.text.setText(this.player.score + '');
 };
 
-ScoreDisplay.prototype.resize = function () {
+ScoreDisplay.prototype.resize = function() {
     this.updatePosition();
 };
 
