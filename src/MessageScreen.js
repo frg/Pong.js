@@ -35,7 +35,7 @@ MessageScreen.prototype.setMessage = function(message) {
 
 MessageScreen.prototype.setTextStyle = function(style) {
     style = extend(config.TEXT_STYLE, style);
-    this.startMsg.setStyle(style);
+    this.startMsg.style = style;
 };
 
 MessageScreen.prototype.resize = function() {

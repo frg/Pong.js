@@ -10,7 +10,9 @@ module.exports = {
     SCORES_MARGIN: { x: 30, y: 30 },
 
     TEXT_STYLE: {
-        font: '60px Helvetica, Arial, sans-serif',
+        fontFamily: 'Helvetica, Arial',
+        fontStyle: 'sans-serif',
+        fontSize: '60px',
         fill: '#eee',
         align: 'center'
     },

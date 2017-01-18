@@ -23,7 +23,7 @@ ScoreDisplay.prototype.bind = function() {
 
 ScoreDisplay.prototype.setTextStyle = function(style) {
     style = extend(config.TEXT_STYLE, style);
-    this.text.setStyle(style);
+    this.text.style = style;
 };
 
 ScoreDisplay.prototype.render = function() {
