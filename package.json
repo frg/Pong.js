@@ -5,7 +5,8 @@
     "main": "src/Pong.js",
     "scripts": {
         "build": "browserify src/index.js -o build/Pong.js",
-        "watch": "watchify src/index.js -o build/Pong.js"
+        "watch": "watchify src/index.js -o build/Pong.js",
+        "dev": "nodemon server.js && npm run watch"
     },
     "dependencies": {
         "deep-extend": "0.2.x",
@@ -24,6 +25,8 @@
     "license": "BSD-2-Clause",
     "devDependencies": {
         "browserify": "^2.36.1",
+        "express": "^4.14.0",
+        "nodemon": "^1.11.0",
         "watchify": "^0.3.0"
     }
 }
