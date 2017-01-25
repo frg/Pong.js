@@ -42503,6 +42503,7 @@ module.exports = Arena;
      this.size = options.size || config.BALL_SIZE;
      this.setSpeed(options.speed || config.BALL_SPEED);
      this.setVelocity(options.velocity || [config.BALL_SPEED, config.BALL_SPEED]);
+     console.log(options.velocity);
      this.lastUpdate = new Date().getTime();
      this.removed = false;
      this.color = parseOctal(options.color) || config.BALL_COLOR;
@@ -43197,17 +43198,28 @@ Pong.prototype.bind = function() {
 };
 
 Pong.prototype.addBall = function() {
+    var percentageBoundary = 0.80;
+
     var ball = new Ball(this, {
         color: this.ballSettings.color,
         image: this.ballSettings.image,
         size: this.ballSettings.size,
         speed: this.ballSettings.speed,
-        velocity: this.ballSettings.velocity
+        // vary velocity by a random amount within a 10% +/- boundary of config ball speed
+        velocity: [
+            getRandomArbitrary(config.BALL_SPEED * percentageBoundary, config.BALL_SPEED / percentageBoundary),
+            // also turn toggle this value's sign randomly
+            getRandomArbitrary(config.BALL_SPEED * percentageBoundary, config.BALL_SPEED / percentageBoundary) * [-1, 1][Math.random() * 2 | 0]
+        ]
     });
 
     this.balls.push(ball);
     return ball;
 };
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 Pong.prototype.start = function() {
     this.addBall();
