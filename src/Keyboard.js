@@ -1,8 +1,7 @@
-
 var keycode = require('keycode'),
     Keyboard;
 
-function normaliseControls (controls) {
+function normaliseControls(controls) {
     var out = {},
         val;
 
@@ -12,21 +11,21 @@ function normaliseControls (controls) {
         if (typeof val === 'object') {
             out[key] = val;
         } else {
-            out[key] = [ val ];
+            out[key] = [val];
         }
     }
 
     return out;
 }
 
-Keyboard = function (controls) {
+Keyboard = function(controls) {
     this.pressed = {};
     this.controls = {};
     this.addControls(controls);
     this.bind();
 };
 
-Keyboard.prototype.addControls = function (controls) {
+Keyboard.prototype.addControls = function(controls) {
     var hasControl, key;
 
     controls = normaliseControls(controls);
@@ -47,20 +46,20 @@ Keyboard.prototype.addControls = function (controls) {
     }
 };
 
-Keyboard.prototype.bind = function () {
+Keyboard.prototype.bind = function() {
     var self = this;
 
-    document.addEventListener('keydown', function (e) {
+    document.addEventListener('keydown', function(e) {
         self.setKeyState(keycode(e.keyCode), true);
     }, false);
 
-    document.addEventListener('keyup', function (e) {
+    document.addEventListener('keyup', function(e) {
         self.setKeyState(keycode(e.keyCode), false);
     }, false);
 
 };
 
-Keyboard.prototype.setKeyState = function (keyName, state) {
+Keyboard.prototype.setKeyState = function(keyName, state) {
     var found, i;
 
     for (var key in this.controls) {

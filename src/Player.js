@@ -1,6 +1,7 @@
 var pixi = require('pixi.js'),
     config = require('./config'),
     Keyboard = require('./Keyboard'),
+    Touch = require('./Touch'),
     ScoreDisplay = require('./ScoreDisplay'),
     geometry = require('geometry'),
     EventEmitter = require('event-emitter'),
@@ -24,6 +25,7 @@ Player = function(game, options) {
     this.speed = options.speed || config.PLAYER_SPEED;
     this.lastUpdate = new Date().getTime();
     this.keyboard = new Keyboard(options.controls || defaults.controls);
+    this.touch = new Touch(this);
     this.y = 0;
     this.score = 0;
     this.scoreDisplay = new ScoreDisplay(this);
@@ -76,11 +78,11 @@ Player.prototype.render = function() {
 Player.prototype.update = function() {
     this.graphics.position.y = this.screenY();
 
-    if (this.keyboard.pressed.up) {
+    if (this.keyboard.pressed.up || this.touch.isTouchingUp()) {
         this.move(-1);
     }
 
-    if (this.keyboard.pressed.down) {
+    if (this.keyboard.pressed.down || this.touch.isTouchingDown()) {
         this.move(1);
     }
 
