@@ -15,7 +15,6 @@
      this.size = options.size || config.BALL_SIZE;
      this.setSpeed(options.speed || config.BALL_SPEED);
      this.setVelocity(options.velocity || [config.BALL_SPEED, config.BALL_SPEED]);
-     console.log(options.velocity);
      this.lastUpdate = new Date().getTime();
      this.removed = false;
      this.color = parseOctal(options.color) || config.BALL_COLOR;
