@@ -262,7 +262,7 @@ Pong.prototype.setBackgroundImage = function(imageOptions) {
     });
 };
 
-function calaculateWithToHeightRatio(ratioStr) {
+function calaculateWidthToHeightRatio(ratioStr) {
     var ratioArr = ratioStr.split(':');
     return ratioArr[0] / ratioArr[1];
 }
@@ -271,12 +271,13 @@ Pong.prototype.updateBackgroundSize = function() {
     if (this.backgroundImage) {
         if (this.backgroundImageOptions.strech === 'width') {
             this.backgroundImage.width = this.renderer.width;
-            this.backgroundImage.height = this.renderer.width / calaculateWithToHeightRatio(this.backgroundImageOptions.aspectRatio);
-            this.backgroundImage.y = (this.renderer.height / 2) - (this.backgroundImage.height / 2);
+            this.backgroundImage.height = (this.renderer.width / calaculateWidthToHeightRatio(this.backgroundImageOptions.aspectRatio)) - config.SCORES_BACKGROUND_HEIGHT;
+            this.backgroundImage.y = ((this.renderer.height / 2) - (this.backgroundImage.height / 2)) - config.SCORES_BACKGROUND_HEIGHT;
         } else {
-            this.backgroundImage.width = this.renderer.height * calaculateWithToHeightRatio(this.backgroundImageOptions.aspectRatio);
-            this.backgroundImage.height = this.renderer.height;
+            this.backgroundImage.width = this.renderer.height * calaculateWidthToHeightRatio(this.backgroundImageOptions.aspectRatio);
+            this.backgroundImage.height = this.renderer.height - config.SCORES_BACKGROUND_HEIGHT;
             this.backgroundImage.x = (this.renderer.width / 2) - (this.backgroundImage.width / 2);
+            this.backgroundImage.y = config.SCORES_BACKGROUND_HEIGHT;
         }
     }
 };
@@ -289,6 +290,16 @@ Pong.prototype.resize = function() {
     this.renderer.resize(width, height);
     this.emit('resize', width, height, this);
     this.renderer.render(this.stage);
+};
+
+Pong.prototype.setScoreDisplayColor = function(color) {
+    this.emit('setScoreDisplayColor', color);
+    this.updateIfStill();
+};
+
+Pong.prototype.setScoreDisplayHeight = function(height) {
+    this.emit('setScoreDisplayHeight', height);
+    this.updateIfStill();
 };
 
 Pong.prototype.setLinesColor = function(color) {
