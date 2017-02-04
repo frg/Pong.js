@@ -14,15 +14,13 @@ Touch.prototype.bind = function() {
     document.addEventListener("touchmove", handleTouchDownEvent, false);
 
     function handleTouchDownEvent(event) {
-        event.preventDefault();
         self.touching = {
             x: event.changedTouches[0].pageX,
             y: event.changedTouches[0].pageY
         };
     }
 
-    document.addEventListener('touchend', function handleTouchUpEvent(evente) {
-        event.preventDefault();
+    document.addEventListener('touchend', function handleTouchUpEvent(event) {
         self.touching = null;
     }, false);
 
@@ -50,7 +48,8 @@ Touch.prototype.calculateTouchingState = function() {
         if (this.touching.y < Number.MAX_SAFE_INTEGER && this.touching.y > Number.MIN_SAFE_INTEGER) {
             // within y range of player
             var playerXCenter = this.player.graphics.x + (this.player.width / 2);
-            if (this.touching.x < (playerXCenter + 100) && this.touching.x > (playerXCenter - 100)) {
+            var controlBoundary = this.player.width * 6;
+            if (this.touching.x < (playerXCenter + controlBoundary) && this.touching.x > (playerXCenter - controlBoundary)) {
                 // within x range of player
 
                 var playerYCenter = this.player.graphics.y + (this.player.height / 2);
