@@ -156,7 +156,7 @@
  Ball.prototype.checkWallsCollision = function() {
      var BB = this.getBoundingBox();
 
-     if (BB.origin.y < 0) {
+     if (BB.origin.y < config.SCORES_BACKGROUND_HEIGHT || 0) {
          this.bounce(0, 1);
      } else if (BB.getMax().y > this.game.renderer.height) {
          this.bounce(0, -1);
