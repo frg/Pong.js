@@ -175,6 +175,8 @@ Pong.prototype.togglePause = function() {
 };
 
 Pong.prototype.update = function() {
+    this.stats.update();
+
     if (this.started) {
         this.emit('beforeupdate', this);
         this.refresh();
