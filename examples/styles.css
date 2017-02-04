@@ -1,81 +1,77 @@
-
 @font-face {
     font-family: '8bit_wondernominal';
     src: url('fonts/8-bit_wonder-webfont.eot');
-    src: url('fonts/8-bit_wonder-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/8-bit_wonder-webfont.woff') format('woff'),
-         url('fonts/8-bit_wonder-webfont.ttf') format('truetype'),
-         url('fonts/8-bit_wonder-webfont.svg#8bit_wondernominal') format('svg');
+    src: url('fonts/8-bit_wonder-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/8-bit_wonder-webfont.woff') format('woff'), url('fonts/8-bit_wonder-webfont.ttf') format('truetype'), url('fonts/8-bit_wonder-webfont.svg#8bit_wondernominal') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
-body, html {
-	margin: 0;
-	padding: 0;
+body,
+html {
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	min-height: 100%;
-	background: #111;
-	color: #666;
-	text-align: center;
-	font-family: '8bit_wondernominal', Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	overflow: hidden;
+    min-height: 100%;
+    background: #111;
+    color: #666;
+    text-align: center;
+    font-family: '8bit_wondernominal', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    overflow: hidden;
 }
 
 #pong {
-	width: 100%;
-	height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 #pong.framed {
-	width: 800px;
-	height: 600px;
-	margin: 20px auto;
+    width: 800px;
+    height: 600px;
+    margin: 20px auto;
 }
 
 .panel {
-	padding-top: 14px;
-	background: #191919;
-	height: 30px;
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
+    padding-top: 14px;
+    background: #191919;
+    height: 30px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 
 .page {
-	max-width: 940px;
-	margin: 20px auto;
-	background: #f5f5f5;
-	padding: 20px;
+    max-width: 940px;
+    margin: 20px auto;
+    background: #f5f5f5;
+    padding: 20px;
 }
 
 h2 {
-	font-size: 24px;
+    font-size: 24px;
 }
 
 .page ul {
-	width: 300px;
-	margin: auto;
-	text-align: left;
+    width: 300px;
+    margin: auto;
+    text-align: left;
 }
 
 .page ul li a {
-	color: #555;
-	font-size: 18px;
+    color: #555;
+    font-size: 18px;
 }
 
 a {
-	color: #eee;
-	text-decoration: none;
+    color: #eee;
+    text-decoration: none;
 }
 
 a.back {
-	position: absolute;
-	top: 14px;
-	left: 15px;
+    position: absolute;
+    top: 14px;
+    left: 15px;
 }
