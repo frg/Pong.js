@@ -49,6 +49,10 @@ Player.prototype.addControls = function(controls) {
     this.keyboard.addControls(controls);
 };
 
+Player.prototype.resetControls = function() {
+    this.keyboard.resetControls();
+};
+
 Player.prototype.bind = function() {
     var self = this;
 
@@ -90,6 +94,13 @@ Player.prototype.update = function() {
 };
 
 Player.prototype.move = function(direction) {
+    var newPos = this.predictPosition(direction);
+
+    this.y = newPos.y;
+    this.lastFrameLength = newPos.lastFrameLength;
+};
+
+Player.prototype.predictPosition = function(direction) {
     var elapsed = new Date().getTime() - this.lastUpdate || 1000 / 60,
         distance = (elapsed / 1000) * this.speed,
         stageHeight = this.game.renderer.height,
@@ -98,13 +109,17 @@ Player.prototype.move = function(direction) {
     newY = this.y + distance * direction;
 
     if (newY > stageHeight / 2 - this.height / 2) {
+        // handle downward movement
         newY = stageHeight / 2 - this.height / 2;
-    } else if (newY < -stageHeight / 2 + this.height / 2) {
-        newY = -stageHeight / 2 + this.height / 2;
+    } else if (newY < -stageHeight / 2 + (this.height / 2 + config.SCORES_BACKGROUND_HEIGHT)) {
+        // handle upward movement
+        newY = -stageHeight / 2 + (this.height / 2 + config.SCORES_BACKGROUND_HEIGHT);
     }
 
-    this.y = newY;
-    this.lastFrameLength = elapsed;
+    return {
+        y: newY,
+        lastFrameLength: elapsed
+    };
 };
 
 Player.prototype.screenX = function() {
@@ -161,6 +176,11 @@ Player.prototype.refresh = function() {
 
 Player.prototype.setHeight = function(height) {
     this.height = height;
+    this.refresh();
+};
+
+Player.prototype.setWidth = function(width) {
+    this.width = width;
     this.refresh();
 };
 
