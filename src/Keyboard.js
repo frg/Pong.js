@@ -46,6 +46,10 @@ Keyboard.prototype.addControls = function(controls) {
     }
 };
 
+Keyboard.prototype.resetControls = function(controls) {
+    this.controls = {};
+};
+
 Keyboard.prototype.bind = function() {
     var self = this;
 
