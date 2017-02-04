@@ -1,5 +1,6 @@
 var pixi = require('pixi.js'),
     Loop = require('game-loop'),
+    Stats = require('stats.js'),
     Player = require('./Player'),
     Ball = require('./Ball'),
     Arena = require('./Arena'),
@@ -44,6 +45,15 @@ Pong = function(wrapper) {
         b: new Player(this, { side: 'right' })
     };
 
+    this.stats = new Stats();
+    this.stats.setMode(0);
+    this.stats.domElement.style.position = 'absolute';
+    this.stats.domElement.style.left = '0px';
+    this.stats.domElement.style.top = '0px';
+    this.stats.domElement.style.display = 'none';
+    this.stats.begin();
+    document.body.appendChild(this.stats.domElement);
+
     this.resize();
     this.bind();
     this.startScreen.show();
@@ -54,6 +64,14 @@ Pong = function(wrapper) {
 };
 
 Pong.prototype = new EventEmitter();
+
+Pong.prototype.showStats = function() {
+    this.stats.domElement.style.display = 'block';
+};
+
+Pong.prototype.hideStats = function() {
+    this.stats.domElement.style.display = 'none';
+};
 
 Pong.prototype.bind = function() {
     var self = this;
