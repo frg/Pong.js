@@ -19,10 +19,17 @@ var pixi = require('pixi.js'),
         speed: config.BALL_SPEED,
         velocity: [config.BALL_SPEED, config.BALL_SPEED]
     },
+    optionsDefaults = {
+        screens: {
+            enable: true
+        }
+    },
     Pong;
 
-Pong = function(wrapper) {
+Pong = function(wrapper, options) {
     EventEmitter.apply(this);
+
+    this._options = extend(optionsDefaults, options || {});
 
     this.wrapper = wrapper;
     this.stage = new pixi.Stage(config.BG_COLOR);
@@ -30,9 +37,13 @@ Pong = function(wrapper) {
     this.loop = new Loop();
     this.balls = [];
     this.arena = new Arena(this);
-    this.startScreen = new StartScreen(this);
-    this.pauseScreen = new PauseScreen(this);
-    this.endScreen = new MessageScreen(this);
+
+    if (this._options.screens.enable === true) {
+        this.startScreen = new StartScreen(this);
+        this.pauseScreen = new PauseScreen(this);
+        this.endScreen = new MessageScreen(this);
+    }
+
     this.hits = 0;
     this.totalHits = 0;
     this.bounces = 0;
@@ -56,8 +67,9 @@ Pong = function(wrapper) {
 
     this.resize();
     this.bind();
-    this.startScreen.show();
-    this.endScreen.hide();
+    if (this._options.screens.enable === true) {
+        this.endScreen.hide();
+    }
     this.update();
 
     wrapper.appendChild(this.renderer.view);
@@ -90,22 +102,24 @@ Pong.prototype.bind = function() {
         self.totalHits += 1;
     });
 
-    document.addEventListener('keydown', function(e) {
-        var key = keycode(e.keyCode);
+    if (this._options.screens.enable === true) {
+        document.addEventListener('keydown', function(e) {
+            var key = keycode(e.keyCode);
 
-        if (key === 'p') {
-            self.togglePause();
-        } else if (key === 'esc' || key === 'r') {
-            self.reset();
-            self.endScreen.hide();
-        } else if (key === 'enter' && self.won) {
-            self.reset();
-            self.won = false;
-            self.loop.play();
-            self.endScreen.hide();
-            self.start();
-        }
-    });
+            if (key === 'p') {
+                self.togglePause();
+            } else if (key === 'esc' || key === 'r') {
+                self.reset();
+                self.endScreen.hide();
+            } else if (key === 'enter' && self.won) {
+                self.reset();
+                self.won = false;
+                self.loop.play();
+                self.endScreen.hide();
+                self.start();
+            }
+        });
+    }
 };
 
 Pong.prototype.addBall = function() {
