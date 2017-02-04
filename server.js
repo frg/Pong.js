@@ -7,6 +7,7 @@ var app = express(),
 app.use('/', express.static(__dirname + '/examples'));
 app.use('/examples', express.static(__dirname + '/examples'));
 app.use('/build', express.static(__dirname + '/build'));
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 app.get('/', function(req, res) {
     var files = getFiles(listDir).filter(function(element, index) {

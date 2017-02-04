@@ -10,12 +10,13 @@
     },
     "dependencies": {
         "deep-extend": "0.2.x",
-        "event-emitter": "0.2.x",
+        "event-emitter": "0.3.x",
         "game-loop": "0.0.x",
         "geometry": "0.1.x",
         "keycode": "0.3.x",
         "npm": "1.3.x",
-        "pixi.js": "^4.3.3"
+        "pixi.js": "^4.3.4",
+        "stats.js": "^0.17.0"
     },
     "repository": {
         "type": "git",
