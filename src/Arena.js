@@ -1,12 +1,15 @@
 var pixi = require('pixi.js'),
     config = require('./config'),
     parseOctal = require('./utils').parseOctal,
+    extend = require('deep-extend'),
     Arena;
 
 Arena = function(game) {
     this.game = game;
     this.linesColor = config.LINES_COLOR;
     this.linesWidth = config.LINES_WIDTH;
+    this.scoreDisplayColor = config.SCORES_BACKGROUND_COLOR;
+    this.scoreDisplayHeight = config.SCORES_BACKGROUND_HEIGHT;
 
     this.drawLines();
     this.bind();
@@ -23,10 +26,27 @@ Arena.prototype.bind = function() {
         self.setLinesColor(color);
     });
 
-
     this.game.on('setLinesWidth', function(width) {
         self.setLinesWidth(width);
     });
+
+    this.game.on('setScoreDisplayColor', function(color) {
+        self.setScoreDisplayColor(color);
+    });
+
+    this.game.on('setScoreDisplayHeight', function(height) {
+        self.setScoreDisplayHeight(height);
+    });
+};
+
+Arena.prototype.setScoreDisplayColor = function(color) {
+    this.scoreDisplayColor = parseOctal(color);
+    this.updateScoreBoardStyle();
+};
+
+Arena.prototype.setScoreDisplayHeight = function(height) {
+    this.scoreDisplayHeight = parseInt(height);
+    this.updateScoreBoardStyle();
 };
 
 Arena.prototype.setLinesColor = function(color) {
@@ -60,7 +80,17 @@ Arena.prototype.drawLines = function() {
         this.lines[i] = new pixi.Graphics();
         this.game.stage.addChild(this.lines[i]);
     }
+
+    this.scoreBoardBackground = new pixi.Graphics();
+    this.game.stage.addChild(this.scoreBoardBackground);
 };
+
+Arena.prototype.updateScoreBoardStyle = function() {
+    this.scoreBoardBackground.clear();
+    this.scoreBoardBackground.beginFill(this.scoreDisplayColor, 1);
+    this.scoreBoardBackground.drawRect(0, 0, this.game.renderer.width, this.scoreDisplayHeight);
+    this.scoreBoardBackground.endFill();
+}
 
 Arena.prototype.updateLines = function() {
     var positions = this.getLinePositions();
@@ -76,6 +106,7 @@ Arena.prototype.updateLines = function() {
 
 Arena.prototype.resize = function() {
     this.updateLines();
+    this.updateScoreBoardStyle();
 };
 
 module.exports = Arena;
