@@ -42705,7 +42705,7 @@ Player = function(game, options) {
     this.speed = options.speed || config.PLAYER_SPEED;
     this.lastUpdate = new Date().getTime();
     this.keyboard = new Keyboard(options.controls || defaults.controls);
-    this.touch = new Touch(this);
+    this.touch = new Touch(game, this);
     this.y = 0;
     this.score = 0;
     this.scoreDisplay = new ScoreDisplay(this);
@@ -43341,7 +43341,8 @@ module.exports = StartScreen;
 },{"./MessageScreen":207,"keycode":34}],213:[function(require,module,exports){
 var Touch;
 
-Touch = function(player) {
+Touch = function(game, player) {
+    this.game = game;
     this.player = player;
     this.touching = null;
     this.enabled = false;
@@ -43389,7 +43390,7 @@ Touch.prototype.calculateTouchingState = function() {
         if (this.touching.y < Number.MAX_SAFE_INTEGER && this.touching.y > Number.MIN_SAFE_INTEGER) {
             // within y range of player
             var playerXCenter = this.player.graphics.x + (this.player.width / 2);
-            var controlBoundary = this.player.width * 6;
+            var controlBoundary = this.game.renderer.width / 3;
             if (this.touching.x < (playerXCenter + controlBoundary) && this.touching.x > (playerXCenter - controlBoundary)) {
                 // within x range of player
 

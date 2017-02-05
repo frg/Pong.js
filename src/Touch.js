@@ -1,6 +1,7 @@
 var Touch;
 
-Touch = function(player) {
+Touch = function(game, player) {
+    this.game = game;
     this.player = player;
     this.touching = null;
     this.enabled = false;
@@ -48,7 +49,7 @@ Touch.prototype.calculateTouchingState = function() {
         if (this.touching.y < Number.MAX_SAFE_INTEGER && this.touching.y > Number.MIN_SAFE_INTEGER) {
             // within y range of player
             var playerXCenter = this.player.graphics.x + (this.player.width / 2);
-            var controlBoundary = this.player.width * 6;
+            var controlBoundary = this.game.renderer.width / 3;
             if (this.touching.x < (playerXCenter + controlBoundary) && this.touching.x > (playerXCenter - controlBoundary)) {
                 // within x range of player
 
