@@ -123,18 +123,24 @@ Pong.prototype.bind = function() {
 };
 
 Pong.prototype.addBall = function() {
-    var percentageBoundary = 0.80;
+    var percentageBoundary = 0.60,
+        // * n value used to help keep away from corner
+        // / n value used to dampen value
+        boundaryWidth = (this.renderer.width * 0.8) / 1100,
+        boundaryHeight = ((this.renderer.height - config.SCORES_BACKGROUND_HEIGHT) * 0.8) / 1100,
+        // vary velocity by a random amount within a 10% +/- boundary of config ball speed
+        velocity = [
+            getRandomArbitrary(boundaryWidth * percentageBoundary, boundaryWidth) * config.BALL_SPEED,
+            // also turn toggle this value's sign randomly
+            getRandomArbitrary(boundaryHeight / percentageBoundary, boundaryHeight) * config.BALL_SPEED * [-1, 1][Math.random() * 2 | 0]
+        ];
+
     var ball = new Ball(this, {
         color: this.ballSettings.color,
         image: this.ballSettings.image,
         size: this.ballSettings.size,
         speed: this.ballSettings.speed,
-        // vary velocity by a random amount within a 10% +/- boundary of config ball speed
-        velocity: [
-            getRandomArbitrary(config.BALL_SPEED * percentageBoundary, config.BALL_SPEED / percentageBoundary),
-            // also turn toggle this value's sign randomly
-            getRandomArbitrary(config.BALL_SPEED * percentageBoundary, config.BALL_SPEED / percentageBoundary) * [-1, 1][Math.random() * 2 | 0]
-        ]
+        velocity: velocity
     });
 
     this.balls.push(ball);
