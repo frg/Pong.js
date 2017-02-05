@@ -117,7 +117,6 @@
 
      this.graphics.position.x = (this.game.renderer.width / 2) + this.x;
      this.graphics.position.y = (this.game.renderer.height / 2) + (config.SCORES_BACKGROUND_HEIGHT / 2) + this.y;
-     //  console.log('ball location:', this.graphics.position.x, this.graphics.position.y);
  };
 
  Ball.prototype.update = function() {
