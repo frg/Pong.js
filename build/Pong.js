@@ -42771,7 +42771,7 @@ Mouse.prototype.isMouseDown = function() {
 };
 
 Mouse.prototype.calculateMouseState = function() {
-    if (this.enabled === true && this.touching !== null) {
+    if (this.enabled === true && this.mousedown !== null) {
         // check if touch event is within control distance of player
         if (this.mousedown.y < Number.MAX_SAFE_INTEGER && this.mousedown.y > Number.MIN_SAFE_INTEGER) {
             // within y range of player
