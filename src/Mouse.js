@@ -36,7 +36,7 @@ Mouse.prototype.disable = function() {
 };
 
 Mouse.prototype.isMouseUp = function() {
-    return this.calculateTouchingState() === 1;
+    return this.calculateMouseState() === 1;
 };
 
 Mouse.prototype.isMouseDown = function() {
