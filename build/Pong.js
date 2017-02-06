@@ -42738,8 +42738,8 @@ Mouse = function(game, player) {
 Mouse.prototype.bind = function() {
     var self = this;
 
-    document.addEventListener('onmousedown', handleMouseDownEvent, false);
-    document.addEventListener("onmousemove", handleMouseDownEvent, false);
+    document.addEventListener('mousedown', handleMouseDownEvent, false);
+    document.addEventListener("mousemove", handleMouseDownEvent, false);
 
     function handleMouseDownEvent(event) {
         self.mousedown = {
@@ -42748,7 +42748,7 @@ Mouse.prototype.bind = function() {
         };
     }
 
-    document.addEventListener('onmouseup', function handleTouchUpEvent(event) {
+    document.addEventListener('mouseup', function handleTouchUpEvent(event) {
         self.mousedown = null;
     }, false);
 
